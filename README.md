@@ -9,6 +9,7 @@ Async audio upload and transcription service built for self-hosted deployment on
 - SQLite-backed job state
 - Shared local storage for uploads and results
 - Whisper transcription with `large-v3-turbo`
+- Persistent Whisper model cache support
 - Separate API and worker process modes
 
 ## API
@@ -33,3 +34,6 @@ python -m app.workers.poller
 ## Deployment
 
 Kubernetes manifests are under `k8s/base/`.
+
+- Base deployment: `kubectl apply -k k8s/base`
+- GPU-ready overlay after NVIDIA runtime is configured on the cluster: `kubectl apply -k k8s/overlays/gpu`

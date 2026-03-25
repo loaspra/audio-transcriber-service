@@ -82,6 +82,20 @@ Build a new standalone async audio transcription service without modifying the e
 - One ClusterIP service
 - One Traefik ingress
 
+## Whisper Cache
+
+- Store downloaded Whisper model files on the shared PVC
+- Use `WHISPER_CACHE_DIR=/data/cache/whisper`
+- Load the model once per worker process and reuse it across jobs
+- Avoid redownloading model weights on pod restart when the PVC persists
+
+## GPU Enablement Notes
+
+- Host driver alone is not enough for k3s GPU pods
+- `nvidia-container-toolkit` and `nvidia-container-runtime` must exist on the host
+- k3s/containerd must be configured to use the NVIDIA runtime
+- After that, the worker deployment can set `runtimeClassName: nvidia`
+
 ## Validation
 
 - Local smoke test with an `.m4a` file

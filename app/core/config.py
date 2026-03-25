@@ -19,6 +19,7 @@ class Settings:
     result_dir: Path
     default_language: str | None
     whisper_model: str
+    whisper_cache_dir: Path
     max_upload_mb: int
     poll_interval_seconds: int
     api_token: str | None
@@ -37,6 +38,7 @@ def get_settings() -> Settings:
         result_dir=Path(_env("RESULT_DIR", str(data_dir / "results"))),
         default_language=_env("DEFAULT_LANGUAGE", "") or None,
         whisper_model=_env("WHISPER_MODEL", "large-v3-turbo"),
+        whisper_cache_dir=Path(_env("WHISPER_CACHE_DIR", str(data_dir / "cache" / "whisper"))),
         max_upload_mb=int(_env("MAX_UPLOAD_MB", "100")),
         poll_interval_seconds=int(_env("POLL_INTERVAL_SECONDS", "2")),
         api_token=_env("API_TOKEN", "") or None,

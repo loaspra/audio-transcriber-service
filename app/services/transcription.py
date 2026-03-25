@@ -12,7 +12,10 @@ def load_model() -> Any:
     if _model is None:
         import whisper  # type: ignore
 
-        _model = whisper.load_model(settings.whisper_model)
+        _model = whisper.load_model(
+            settings.whisper_model,
+            download_root=str(settings.whisper_cache_dir),
+        )
     return _model
 
 
