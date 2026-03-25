@@ -16,6 +16,7 @@ spec:
       containers:
         - name: api
           image: ghcr.io/loaspra/audio-transcriber-service:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
           envFrom:
@@ -26,6 +27,13 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              cpu: "1"
+              memory: "1Gi"
           readinessProbe:
             httpGet:
               path: /health

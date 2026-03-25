@@ -13,10 +13,10 @@ spec:
       labels:
         app: audio-transcriber-worker
     spec:
-      runtimeClassName: nvidia
       containers:
         - name: worker
           image: ghcr.io/loaspra/audio-transcriber-service:latest
+          imagePullPolicy: IfNotPresent
           command: ["python", "-m", "app.workers.poller"]
           envFrom:
             - configMapRef:
