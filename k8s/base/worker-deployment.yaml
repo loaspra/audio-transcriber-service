@@ -13,6 +13,8 @@ spec:
       labels:
         app: audio-transcriber-worker
     spec:
+      imagePullSecrets:
+        - name: ghcr-auth
       containers:
         - name: worker
           image: ghcr.io/loaspra/audio-transcriber-service:latest
