@@ -18,7 +18,7 @@ spec:
       containers:
         - name: worker
           image: ghcr.io/loaspra/audio-transcriber-service:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           command: ["python", "-m", "app.workers.poller"]
           envFrom:
             - configMapRef:
