@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: audio-transcriber-api
+  namespace: transcription
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: audio-transcriber.legion.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: audio-transcriber-api
+                port:
+                  number: 8000

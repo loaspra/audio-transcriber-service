@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: audio-transcriber-config
+  namespace: transcription
+data:
+  APP_ENV: production
+  HOST: 0.0.0.0
+  PORT: "8000"
+  DATA_DIR: /data
+  DATABASE_PATH: /data/db/jobs.sqlite3
+  UPLOAD_DIR: /data/uploads
+  WORK_DIR: /data/work
+  RESULT_DIR: /data/results
+  DEFAULT_LANGUAGE: ""
+  WHISPER_MODEL: large-v3-turbo
+  MAX_UPLOAD_MB: "100"
+  POLL_INTERVAL_SECONDS: "2"

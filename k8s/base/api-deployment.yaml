@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: audio-transcriber-api
+  namespace: transcription
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: audio-transcriber-api
+  template:
+    metadata:
+      labels:
+        app: audio-transcriber-api
+    spec:
+      containers:
+        - name: api
+          image: ghcr.io/loaspra/audio-transcriber-service:latest
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: audio-transcriber-config
+            - secretRef:
+                name: audio-transcriber-secret
+          volumeMounts:
+            - name: data
+              mountPath: /data
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: audio-transcriber-data
