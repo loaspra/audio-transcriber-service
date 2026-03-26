@@ -4,10 +4,11 @@ metadata:
   name: audio-transcriber-api
   namespace: transcription
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: audio-transcriber-api
   ports:
     - name: http
       port: 8000
       targetPort: 8000
+      nodePort: 30800
