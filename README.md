@@ -36,5 +36,5 @@ python -m app.workers.poller
 Kubernetes manifests are under `k8s/base/`.
 
 - Base deployment: `kubectl apply -k k8s/base`
-- GPU-ready overlay after NVIDIA runtime is configured on the cluster: `kubectl apply -k k8s/overlays/gpu`
+- Base deployment includes the GPU worker configuration for `legion-server`
 - Tailnet/backend access via NodePort: `http://<legion-tailnet-ip>:30800`

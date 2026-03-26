@@ -13,6 +13,7 @@ spec:
       labels:
         app: audio-transcriber-worker
     spec:
+      runtimeClassName: nvidia
       imagePullSecrets:
         - name: ghcr-auth
       containers:
@@ -32,9 +33,11 @@ spec:
             requests:
               cpu: "1"
               memory: "2Gi"
+              nvidia.com/gpu: "1"
             limits:
               cpu: "4"
               memory: "6Gi"
+              nvidia.com/gpu: "1"
       volumes:
         - name: data
           persistentVolumeClaim:

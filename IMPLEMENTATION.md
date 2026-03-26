@@ -81,6 +81,7 @@ Build a new standalone async audio transcription service without modifying the e
 - One PVC
 - One ClusterIP service
 - One Traefik ingress
+- The default worker deployment requests one NVIDIA GPU on `legion-server`
 
 ## Whisper Cache
 
@@ -94,7 +95,8 @@ Build a new standalone async audio transcription service without modifying the e
 - Host driver alone is not enough for k3s GPU pods
 - `nvidia-container-toolkit` and `nvidia-container-runtime` must exist on the host
 - k3s/containerd must be configured to use the NVIDIA runtime
-- After that, the worker deployment can set `runtimeClassName: nvidia`
+- The NVIDIA device plugin must run with `runtimeClassName: nvidia` so the node advertises `nvidia.com/gpu`
+- The default worker deployment uses `runtimeClassName: nvidia` and requests `nvidia.com/gpu: 1`
 
 ## Validation
 
